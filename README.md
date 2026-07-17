@@ -13,8 +13,7 @@ This study develops a machine learning approach to classify dengue risk at the m
 level across CALABARZON, Philippines, using climate, environmental, and socioeconomic
 data.
 
-Risk labeling in this study was conducted in two distinct stages, kept separate to avoid data
-leakage between training and evaluation:
+Risk labeling in this study was conducted in two distinct stages. 
 
 **Stage 1 — Training target (per municipality-month observation):**
 Each observation was labeled based on that municipality's own historical dengue incidence
@@ -65,6 +64,9 @@ results are shared here; the underlying dataset is not redistributable.
    importance/SHAP outputs, generated from the selected model (`results/`)
 
 ## Repository Structure
+
+```
+.
 ├── notebooks/
 │   ├── data-cleaning-eda-feature-engineering/
 │   ├── data-modeling/                  # ML models, final classification, feature importance, SHAP
@@ -74,7 +76,7 @@ results are shared here; the underlying dataset is not redistributable.
 │   └── feature-importance-shap/        # excel results
 ├── index.html                          # dashboard entry point (GitHub Pages)
 └── README.md
-
+```
 ## Key Files for Review
 
 | File | What to Look For |
