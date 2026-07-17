@@ -9,10 +9,10 @@ The notebooks include implementations of the following algorithms:
 * Random Forest
 * XGBoost
 
-Each notebook contains the workflow for its respective machine learning algorithm, including model training, hyperparameter tuning, and performance evaluation. Feature importance and SHAP analysis are included only for the selected final XGBoost model.
+Each notebook contains the workflow for its respective machine learning algorithm, including model training, hyperparameter tuning, and performance evaluation.
 
 ## Final Modeling Notebook
 
-The notebook `Thesis (Final Model with Classification.ipynb` contains the final implementation used in this study. It trains the selected XGBoost model and generates the municipality-level dengue risk classifications.
+The notebook `Thesis (Final Model with Classification).ipynb` contains the final implementation used in this study. It trains the selected XGBoost model, generates the municipality-level dengue risk classifications, and performs feature importance and SHAP analyses for model interpretation.
 
 The generated outputs—including classification results, feature importance, SHAP results, maps, and exported Excel files—are stored in their corresponding folders under `results/`. This folder contains only the notebooks used to develop and execute the models.
