@@ -1,6 +1,6 @@
 # A Data Analysis Approach to Dengue Risk Assessment in CALABARZON Using Machine Learning
 
-**Undergraduate Thesis — Bachelor of Science in Data Science**
+**Undergraduate Thesis — Bachelor of Science in Data Science** <br>
 School of Information Technology, Mapúa University · June 2026
 
 **Authors:** Gio Miguel R. Bihasa · Pam Cassedy T. Dumangeng · Alexandra S. Santos
@@ -11,13 +11,31 @@ School of Information Technology, Mapúa University · June 2026
 
 This study develops a machine learning approach to classify dengue risk at the municipality
 level across CALABARZON, Philippines, using climate, environmental, and socioeconomic
-data. Each municipality-year is classified into one of three risk levels:
+data.
 
-| Risk Level | Basis |
+Risk labeling in this study was conducted in two distinct stages, kept separate to avoid data
+leakage between training and evaluation:
+
+**Stage 1 — Training target (per municipality-month observation):**
+Each observation was labeled based on that municipality's own historical dengue incidence
+(cases per 1,000 population), using its mean (x̄) and standard deviation (s):
+
+| Risk Level | Condition |
 |---|---|
-| High | Municipality's high-risk-month rate ≥ overall 75th percentile |
-| Medium | Medium-or-high-risk-month rate ≥ 60th percentile among non-High municipalities |
-| Low | Does not meet the above thresholds |
+| High | Dengue Incidence > x̄ + 1.5s |
+| Medium | x̄ < Dengue Incidence < x̄ + 1.5s |
+| Low | Dengue Incidence < x̄ |
+
+**Stage 2 — Municipality-level interpretation (post-classification):**
+After the model classifies each observation, results are aggregated per municipality and
+compared against percentile-based thresholds — consistent with epidemic alert methods used
+in dengue surveillance — to produce the final municipality-level risk label:
+
+| Risk Level | Condition |
+|---|---|
+| High | HighRate ≥ 75th percentile of HighRate |
+| Medium | HighRate < 75th percentile AND MedOrHighRate ≥ 60th percentile |
+| Low | Remaining |
 
 The goal is to support public health planning by identifying which municipalities and
 periods are most at risk, using publicly-derivable environmental and socioeconomic
@@ -38,127 +56,21 @@ results are shared here; the underlying dataset is not redistributable.
    chi-square testing across climate, environmental, and socioeconomic variables
    (`notebooks/data-cleaning-eda-feature-engineering/`)
 2. **Data Modeling** — four classifiers (Logistic Regression, SVM, Random Forest, XGBoost)
-   evaluated across single, pairwise, and combined feature sets
-   (`notebooks/data-modeling/`)
+   evaluated across single, pairwise, and combined feature sets, including the final
+   classification, feature importance, and SHAP analysis (`notebooks/data-modeling/`)
 3. **Additional Findings** — dengue incidence lag models, climate variable lag models, and
    a deliberate data leakage demonstration, run separately from the operational model
    (`notebooks/additional-findings/`)
-4. **Feature Importance & SHAP Analysis** — XGBoost gain-based importance and SHAP value
-   analysis for model interpretability (`notebooks/feature-importance-shap/`)
-5. **Classification Results** — final municipality-level risk classification, generated from
-   the selected model (`results/classification/`)
-
-## Repository Structure
-# A Data Analysis Approach to Dengue Risk Assessment in CALABARZON Using Machine Learning
-
-**Undergraduate Thesis — Bachelor of Science in Data Science**
-School of Information Technology, Mapúa University · June 2026
-
-**Authors:** Gio Miguel R. Bihasa · Pam Cassedy T. Dumangeng · Alexandra S. Santos
-**Adviser:** [ADVISER NAME]
-
----
-
-## Overview
-
-This study develops a machine learning approach to classify dengue risk at the municipality
-level across CALABARZON, Philippines, using climate, environmental, and socioeconomic
-data. Each municipality-year is classified into one of three risk levels:
-
-| Risk Level | Basis |
-|---|---|
-| High | Municipality's high-risk-month rate ≥ overall 75th percentile |
-| Medium | Medium-or-high-risk-month rate ≥ 60th percentile among non-High municipalities |
-| Low | Does not meet the above thresholds |
-
-The goal is to support public health planning by identifying which municipalities and
-periods are most at risk, using publicly-derivable environmental and socioeconomic
-indicators alongside climate data.
-
-## Data Confidentiality Notice
-
-> **The dataset used in this study is not included in this repository.**
-
-The dengue case data was obtained through a formal request to the Department of Health –
-CALABARZON, under terms limited to academic research use. Raw and processed data files
-are excluded from this repository. The code, methodology, and (documented, aggregated)
-results are shared here; the underlying dataset is not redistributable.
-
-## Methodology
-
-1. **Data Cleaning, EDA & Feature Engineering** — descriptive statistics, ANOVA, and
-   chi-square testing across climate, environmental, and socioeconomic variables
-   (`notebooks/data-cleaning-eda-feature-engineering/`)
-2. **Data Modeling** — four classifiers (Logistic Regression, SVM, Random Forest, XGBoost)
-   evaluated across single, pairwise, and combined feature sets
-   (`notebooks/data-modeling/`)
-3. **Additional Findings** — dengue incidence lag models, climate variable lag models, and
-   a deliberate data leakage demonstration, run separately from the operational model
-   (`notebooks/additional-findings/`)
-4. **Feature Importance & SHAP Analysis** — XGBoost gain-based importance and SHAP value
-   analysis for model interpretability (`notebooks/feature-importance-shap/`)
-5. **Classification Results** — final municipality-level risk classification, generated from
-   the selected model (`results/classification/`)
-
-## Repository Structure
-# A Data Analysis Approach to Dengue Risk Assessment in CALABARZON Using Machine Learning
-
-**Undergraduate Thesis — Bachelor of Science in Data Science**
-School of Information Technology, Mapúa University · June 2026
-
-**Authors:** Gio Miguel R. Bihasa · Pam Cassedy T. Dumangeng · Alexandra S. Santos
-**Adviser:** [ADVISER NAME]
-
----
-
-## Overview
-
-This study develops a machine learning approach to classify dengue risk at the municipality
-level across CALABARZON, Philippines, using climate, environmental, and socioeconomic
-data. Each municipality-year is classified into one of three risk levels:
-
-| Risk Level | Basis |
-|---|---|
-| High | Municipality's high-risk-month rate ≥ overall 75th percentile |
-| Medium | Medium-or-high-risk-month rate ≥ 60th percentile among non-High municipalities |
-| Low | Does not meet the above thresholds |
-
-The goal is to support public health planning by identifying which municipalities and
-periods are most at risk, using publicly-derivable environmental and socioeconomic
-indicators alongside climate data.
-
-## Data Confidentiality Notice
-
-> **The dataset used in this study is not included in this repository.**
-
-The dengue case data was obtained through a formal request to the Department of Health –
-CALABARZON, under terms limited to academic research use. Raw and processed data files
-are excluded from this repository. The code, methodology, and (documented, aggregated)
-results are shared here; the underlying dataset is not redistributable.
-
-## Methodology
-
-1. **Data Cleaning, EDA & Feature Engineering** — descriptive statistics, ANOVA, and
-   chi-square testing across climate, environmental, and socioeconomic variables
-   (`notebooks/data-cleaning-eda-feature-engineering/`)
-2. **Data Modeling** — four classifiers (Logistic Regression, SVM, Random Forest, XGBoost)
-   evaluated across single, pairwise, and combined feature sets
-   (`notebooks/data-modeling/`)
-3. **Additional Findings** — dengue incidence lag models, climate variable lag models, and
-   a deliberate data leakage demonstration, run separately from the operational model
-   (`notebooks/additional-findings/`)
-4. **Feature Importance & SHAP Analysis** — XGBoost gain-based importance and SHAP value
-   analysis for model interpretability (`notebooks/feature-importance-shap/`)
-5. **Classification Results** — final municipality-level risk classification, generated from
-   the selected model (`results/classification/`)
+4. **Classification Results** — final municipality-level risk classification and feature
+   importance/SHAP outputs, generated from the selected model (`results/`)
 
 ## Repository Structure
 ├── notebooks/
 │   ├── data-cleaning-eda-feature-engineering/
-│   ├── data-modeling/                  # machine learning models + final classification notebook + featureimportance + shap
-│   ├── additional-findings/            # lag models, data leakage demo
+│   ├── data-modeling/                  # ML models, final classification, feature importance, SHAP
+│   └── additional-findings/            # lag models, data leakage demo
 ├── results/
-│   └── classification/                 # final risk classification outputs, maps
+│   ├── classification/                 # final risk classification outputs, maps
 │   └── feature-importance-shap/        # excel results
 ├── index.html                          # dashboard entry point (GitHub Pages)
 └── README.md
@@ -170,6 +82,7 @@ results are shared here; the underlying dataset is not redistributable.
 | `notebooks/data-modeling/Thesis__XGB_Model_.ipynb` | Representative XGBoost training workflow: hyperparameter search, cross-validation |
 | `notebooks/data-modeling/Thesis__Final_With_Classification_.ipynb` | Final selected model, municipality-level classification, feature importance, and SHAP output generation |
 | `results/classification/` | Final risk classification results and maps |
+| `results/feature-importance-shap/` | Feature importance and SHAP output tables |
 
 ## Results Summary
 
@@ -191,5 +104,5 @@ human exposure rather than any single factor group.
 
 An interactive dashboard presenting the classification results and dengue risk maps.
 
-- **Embedded version (GitHub Pages):** (https://pcassedy.github.io/dengue-risk-classification-thesis/)
-- **Original Looker Studio link:** (https://datastudio.google.com/reporting/6e3beb04-ea35-44c4-94a5-7dfef0352eec)
+- **Embedded version (GitHub Pages):** [View live dashboard](https://pcassedy.github.io/dengue-risk-classification-thesis/)
+- **Original Looker Studio link:** [Open in Looker Studio](https://datastudio.google.com/reporting/6e3beb04-ea35-44c4-94a5-7dfef0352eec)
