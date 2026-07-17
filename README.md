@@ -3,7 +3,10 @@
 **Undergraduate Thesis — Bachelor of Science in Data Science** <br>
 School of Information Technology, Mapúa University · June 2026
 
-**Authors:** Gio Miguel R. Bihasa · Pam Cassedy T. Dumangeng · Alexandra S. Santos
+**Authors:** 
+- Gio Miguel R. Bihasa
+- Pam Cassedy T. Dumangeng
+- Alexandra S. Santos
 
 ---
 
@@ -27,8 +30,7 @@ Each observation was labeled based on that municipality's own historical dengue 
 
 **Stage 2 — Municipality-level interpretation (post-classification):**
 After the model classifies each observation, results are aggregated per municipality and
-compared against percentile-based thresholds — consistent with epidemic alert methods used
-in dengue surveillance — to produce the final municipality-level risk label:
+compared against percentile-based thresholds which are consistent with epidemic alert methods used in dengue surveillance to produce the final municipality-level risk label:
 
 | Risk Level | Condition |
 |---|---|
